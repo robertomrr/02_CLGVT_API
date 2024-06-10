@@ -1,3 +1,98 @@
+## Esta aplicação foi criada para servir de base para novas aplicações api utilizando os mesmos recursos:
+- **[Composer version 2.5.7 2023-05-24 15:00:39](https://getcomposer.org//)**
+- **[Laravel 10](https://laravel.com//)**
+- **[git version 2.45.1.windows.1](https://github.com//)**
+
+Criação de uma nova aplicação 
+    > composer create-project --prefer-dist laravel/laravel:^10.* 02_CLGVT_API
+    > cd 02_CLGVT_API
+    > git init
+    > git add .
+    > git commit -m "First commit" 
+    > npm install
+    > git add .
+    > git commit -m "npm install" 
+    > code .
+    Configurar Timezone
+        \config\app.php
+            De 'timezone' => 'UTC',
+            P\ 'timezone' => 'America/Sao_Paulo',
+    Configurar idioma
+        link
+        > php artisan lang:publish
+        > git add .
+        > git commit -m "php artisan lang:publish" 
+        > composer require lucascudo/laravel-pt-br-localization --dev
+        > git add .
+        > git commit -m "composer require lucascudo/laravel-pt-br-localization --dev" 
+        > php artisan vendor:publish --tag=laravel-pt-br-localization
+        > git add .
+        > git commit -m "php artisan vendor:publish --tag=laravel-pt-br-localization" 
+        Altere Linha 85 do arquivo config/app.php para:
+            De >  'locale' => 'en',
+            P/ > 'locale' => 'pt_BR'
+            > git add .
+            > git commit -m "Altere Linha 85 do arquivo config/app.php para: De >  'locale' => 'en' P/ > 'locale' => 'pt_BR'" 
+    Apontar banco de dados no arquivo .env ( De laravel P/ db_name )
+        .env
+            DB_CONNECTION=mysql
+            DB_HOST=127.0.0.1
+            DB_PORT=3306
+            DB_DATABASE=db_name
+            DB_USERNAME=root
+            DB_PASSWORD=
+    Ativação a aplicação Laravel
+        > CMD 
+            > npm run dev
+            > php artisan serve
+        > Browser
+            > localhost:8000
+    Instalação do Breeze (blade)
+        Laravel Breeze é uma implementação mínima e simples de todos os recursos de autenticação do Laravel , incluindo login, registro, redefinição de senha, verificação de e-mail e confirmação de senha.
+        Além disso, o Breeze inclui uma página simples de “perfil” onde o usuário pode atualizar seu nome, endereço de e-mail e senha.
+        > composer require laravel/breeze --dev
+        > git add .
+        > git commit -m "composer require laravel/breeze --dev"
+        > php artisan breeze:install
+        Which Breeze stack would you like to install?
+        Blade with Alpine ........................................................................................................ blade
+        Livewire (Volt Class API) with Alpine ................................................................................. livewire
+        Livewire (Volt Functional API) with Alpine ................................................................. livewire-functional
+        React with Inertia ....................................................................................................... react
+        Vue with Inertia ........................................................................................................... vue
+        API only ................................................................................................................... api
+        > api
+        Would you like dark mode support? (yes/no) [no]
+        > yes
+        Which testing framework do you prefer? [PHPUnit]
+        PHPUnit ...................................................................................................................... 0
+        Pest ......................................................................................................................... 1
+        > 0
+        > git add .
+        > git commit -m "php artisan breeze:install"
+    Criação do banco de dados padrão ( users, ...)
+        > php artisan migrate:fresh
+    Popular tabela users
+        > php artisan db:seed
+    Criação do Controller
+        > php artisan make:controller Api/v1/UserController --resource
+        use App\Models\User;
+        public function index()
+            return User::all();
+    Criação de Rotas
+        routes/api.php
+        Route::get(uri:'/users',action:[UserController::class,'index']);
+    Retornar conteúdo padronizado utilizando Resources
+        > php artisan make:resource v1/UserResource
+        > git add .
+        > git commit -m "php artisan make:resource v1/UserResource"
+    GITHUB
+        git remote add origin https://github.com/robertomrr/02_CLGVT_API.git
+        git branch -M main
+        git push -u origin main
+    _____________________________________________________________________________
+    _____________________________________________________________________________
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
