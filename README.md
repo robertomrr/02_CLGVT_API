@@ -3,7 +3,7 @@
 - **[Laravel 10](https://laravel.com//)**
 - **[git version 2.45.1.windows.1](https://github.com//)**
 
-Criação de uma nova aplicação 
+## Criação de uma nova aplicação 
     > composer create-project --prefer-dist laravel/laravel:^10.* 02_CLGVT_API
     > cd 02_CLGVT_API
     > git init
@@ -13,11 +13,11 @@ Criação de uma nova aplicação
     > git add .
     > git commit -m "npm install" 
     > code .
-    Configurar Timezone
+## Configurar Timezone
         \config\app.php
             De 'timezone' => 'UTC',
             P\ 'timezone' => 'America/Sao_Paulo',
-    Configurar idioma
+##  Configurar idioma
         link
         > php artisan lang:publish
         > git add .
@@ -33,7 +33,7 @@ Criação de uma nova aplicação
             P/ > 'locale' => 'pt_BR'
             > git add .
             > git commit -m "Altere Linha 85 do arquivo config/app.php para: De >  'locale' => 'en' P/ > 'locale' => 'pt_BR'" 
-    Apontar banco de dados no arquivo .env ( De laravel P/ db_name )
+##  Apontar banco de dados no arquivo .env ( De laravel P/ db_name )
         .env
             DB_CONNECTION=mysql
             DB_HOST=127.0.0.1
@@ -41,13 +41,13 @@ Criação de uma nova aplicação
             DB_DATABASE=db_name
             DB_USERNAME=root
             DB_PASSWORD=
-    Ativação a aplicação Laravel
+##  Ativação a aplicação Laravel
         > CMD 
             > npm run dev
             > php artisan serve
         > Browser
             > localhost:8000
-    Instalação do Breeze (blade)
+##  Instalação do Breeze (blade)
         Laravel Breeze é uma implementação mínima e simples de todos os recursos de autenticação do Laravel , incluindo login, registro, redefinição de senha, verificação de e-mail e confirmação de senha.
         Além disso, o Breeze inclui uma página simples de “perfil” onde o usuário pode atualizar seu nome, endereço de e-mail e senha.
         > composer require laravel/breeze --dev
@@ -70,23 +70,23 @@ Criação de uma nova aplicação
         > 0
         > git add .
         > git commit -m "php artisan breeze:install"
-    Criação do banco de dados padrão ( users, ...)
+##  Criação do banco de dados padrão ( users, ...)
         > php artisan migrate:fresh
-    Popular tabela users
+##  Popular tabela users
         > php artisan db:seed
-    Criação do Controller
+##  Criação do Controller
         > php artisan make:controller Api/v1/UserController --resource
         use App\Models\User;
         public function index()
             return User::all();
-    Criação de Rotas
+##  Criação de Rotas
         routes/api.php
         Route::get(uri:'/users',action:[UserController::class,'index']);
-    Retornar conteúdo padronizado utilizando Resources
+##  Retornar conteúdo padronizado utilizando Resources
         > php artisan make:resource v1/UserResource
         > git add .
         > git commit -m "php artisan make:resource v1/UserResource"
-    GITHUB
+##  GITHUB
         git remote add origin https://github.com/robertomrr/02_CLGVT_API.git
         git branch -M main
         git push -u origin main
