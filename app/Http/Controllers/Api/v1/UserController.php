@@ -36,7 +36,7 @@ class UserController extends Controller
     {
         //return $request->toArray();
         //
-        return $request;
+        //return $request;
 
         $user = new User();
 
@@ -83,7 +83,10 @@ class UserController extends Controller
         if ($user) {
             // Atualizar o nome do usuário
             $user->name = $request->name;
-
+            $user->email = $request->email;
+            $user->password = $request->password;
+            $user->email_verified_at = $request->email_verified_at;
+            $user->remember_token = $request->remember_token;
             // Salvar as alterações
             $user->save();
 
