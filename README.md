@@ -2,6 +2,7 @@
 - **[Composer version 2.5.7 2023-05-24 15:00:39](https://getcomposer.org//)**
 - **[Laravel 10](https://laravel.com//)**
 - **[git version 2.45.1.windows.1](https://github.com//)**
+- **[Swagger](https://app.swaggerhub.com/)**
 
 ## Criação de uma nova aplicação 
     > composer create-project --prefer-dist laravel/laravel:^10.* 02_CLGVT_API
