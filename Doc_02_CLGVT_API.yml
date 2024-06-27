@@ -1,0 +1,260 @@
+openapi: '3.0.2'
+info:
+  title: API 02_CLGVT
+  version: '1.0'
+  description: Exemplo de API para futuras consultas
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /login:
+    get:
+      summary: Rota de autenticação para obter o token JWT
+      description: >
+        Um usuário cadastrado no sistema, uma vez reconhecido,
+        um token será retornado para permitir o consumo dos recursos da API.
+      tags:
+        - login
+      parameters:
+        - in: query
+          name: username
+          schema:
+            type: string
+          required: true
+          description: Nome de usuário para autenticação
+        - in: query
+          name: password
+          schema:
+            type: string
+          required: true
+          description: Senha do usuário para autenticação
+      responses:
+        '200':
+          description: Login reconhecido, autorizado a acessar os recursos.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: Token JWT
+                  expiresIn:
+                    type: integer
+                    description: Tempo de expiração do token em segundos
+        '401':
+          description: Login não autorizado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users:
+    get:
+      summary: Lista usuários
+      description: Retorna uma lista de usuários cadastrados
+      tags:
+        - users
+      responses:
+        '200':
+          description: Exibe lista de usuários.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          description: Registro não encontrado.
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      summary: Registra dados do usuário
+      description: Esta operação insere um novo registro com os dados do usuário na tabela users.
+      tags:
+        - Usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Registro criado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/{id}:
+    get:
+      summary: Retorna um usuário específico
+      description: Recupera os detalhes de um usuário pelo ID
+      tags:
+        - users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID do usuário
+      responses:
+        '200':
+          description: Exibe detalhes do usuário.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          description: Registro não encontrado.
+        '500':
+          $ref: '#/components/responses/InternalError'
+    put:
+      summary: Atualiza dados do usuário
+      description: Esta operação atualiza na tabela users o registro com os novos dados do usuário.
+      tags:
+        - Usuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID do usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Registro atualizado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    delete:
+      summary: Remove um usuário específico
+      description: Este endpoint removerá apenas os dados referentes a um ID.
+      tags:
+        - Usuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID do usuário
+      responses:
+        '204':
+          description: Removido com sucesso!
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Registro não encontrado.
+components:
+  responses:
+    BadRequest:
+      description: Requisição inválida.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalError:
+      description: O servidor não entendeu a requisição.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnauthorizedError:
+      description: Authentication information is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    OpenID:
+      type: openIdConnect
+      openIdConnectUrl: https://example.com/.well-known/openid-configuration
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://example.com/oauth/authorize
+          tokenUrl: https://example.com/oauth/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+            admin: Grants access to admin operations
+  schemas:
+    User:
+      type: object
+      description: Representação dos campos de requisição de uma solicitação de criação de um registro em banco de dados do IPEMSP.
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: >
+            Número que identifica o registro no banco de dados.
+            Este número é criado automaticamente através de sequence ativado por trigger de banco.
+          example: 1
+        name:
+          type: string
+          description: >
+            Nome do usuário.
+          example: Roberto Moreira
+        email:
+          type: string
+          description: >
+            Email do usuário.
+          example: robertomrr@yahoo.com.br
+        email_verified_at:
+          type: string
+          format: date-time
+          description: >
+            Última data em que o email foi verificado.
+          example: 2024-06-27T09:05:16Z
+        password:
+          type: string
+          description: >
+            Palavra-chave para acesso ao sistema.
+          example: secretpassword
+      required:
+        - name
+        - email
+        - password
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Código de erro.
+        message:
+          type: string
+          description: Mensagem de erro detalhada.
+      required:
+        - code
+        - message
