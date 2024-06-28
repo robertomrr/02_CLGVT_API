@@ -14,7 +14,7 @@
     > git add .
     > git commit -m "npm install" 
 
-##  Instalar do Breeze (blade)
+## Instalar do Breeze (blade)
         Laravel Breeze é uma implementação mínima e simples de todos os recursos de autenticação do Laravel , incluindo login, registro, redefinição de senha, verificação de e-mail e confirmação de senha.
         Além disso, o Breeze inclui uma página simples de “perfil” onde o usuário pode atualizar seu nome, endereço de e-mail e senha.
         > composer require laravel/breeze --dev
@@ -78,30 +78,31 @@
         Popular tabela users
                 > php artisan db:seed
 
-##  Publicar GitHub
+## Publicar GitHub
         git remote add origin https://github.com/robertomrr/02_CLGVT_API.git
         git branch -M main
         git push -u origin main
 
-##  Ativação a aplicação Laravel
+## Ativação a aplicação Laravel
         > CMD 
             > npm run dev
             > php artisan serve
         > Browser
-            > localhost:8000        
+            > localhost:8000  
+
 ## _____________________________________________________________________________
 
-##  Criação do Controller
+## Criação do Controller
         > php artisan make:controller Api/v1/UserController --resource
         use App\Models\User;
         public function index()
             return User::all();
 
-##  Criação de Rotas
+## Criação de Rotas
         routes/api.php
         Route::get(uri:'/users',action:[UserController::class,'index']);
 
-##  Retornar conteúdo padronizado utilizando Resources
+## Retornar conteúdo padronizado utilizando Resources
         > php artisan make:resource v1/UserResource
         > git add .
         > git commit -m "php artisan make:resource v1/UserResource"
