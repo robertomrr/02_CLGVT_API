@@ -4,7 +4,7 @@
 - **[git version 2.45.1.windows.1](https://github.com//)**
 - **[Swagger](https://app.swaggerhub.com/)**
 
-## Criação de uma nova aplicação 
+## Criar aplicação 
     > composer create-project --prefer-dist laravel/laravel:^10.* 02_CLGVT_API
     > cd 02_CLGVT_API
     > git init
@@ -13,42 +13,8 @@
     > npm install
     > git add .
     > git commit -m "npm install" 
-    > code .
-## Configurar Timezone
-        \config\app.php
-            De 'timezone' => 'UTC',
-            P\ 'timezone' => 'America/Sao_Paulo',
-##  Configurar idioma
-        link
-        > php artisan lang:publish
-        > git add .
-        > git commit -m "php artisan lang:publish" 
-        > composer require lucascudo/laravel-pt-br-localization --dev
-        > git add .
-        > git commit -m "composer require lucascudo/laravel-pt-br-localization --dev" 
-        > php artisan vendor:publish --tag=laravel-pt-br-localization
-        > git add .
-        > git commit -m "php artisan vendor:publish --tag=laravel-pt-br-localization" 
-        Altere Linha 85 do arquivo config/app.php para:
-            De >  'locale' => 'en',
-            P/ > 'locale' => 'pt_BR'
-            > git add .
-            > git commit -m "Altere Linha 85 do arquivo config/app.php para: De >  'locale' => 'en' P/ > 'locale' => 'pt_BR'" 
-##  Apontar banco de dados no arquivo .env ( De laravel P/ db_name )
-        .env
-            DB_CONNECTION=mysql
-            DB_HOST=127.0.0.1
-            DB_PORT=3306
-            DB_DATABASE=db_name
-            DB_USERNAME=root
-            DB_PASSWORD=
-##  Ativação a aplicação Laravel
-        > CMD 
-            > npm run dev
-            > php artisan serve
-        > Browser
-            > localhost:8000
-##  Instalação do Breeze (blade)
+
+##  Instalar do Breeze (blade)
         Laravel Breeze é uma implementação mínima e simples de todos os recursos de autenticação do Laravel , incluindo login, registro, redefinição de senha, verificação de e-mail e confirmação de senha.
         Além disso, o Breeze inclui uma página simples de “perfil” onde o usuário pode atualizar seu nome, endereço de e-mail e senha.
         > composer require laravel/breeze --dev
@@ -71,37 +37,86 @@
         > 0
         > git add .
         > git commit -m "php artisan breeze:install"
-##  Criação do banco de dados padrão ( users, ...)
-        > php artisan migrate:fresh
-##  Popular tabela users
-        > php artisan db:seed
+
+## Instaler Tailwind <<-- Não se aplica a uma api -->>
+
+## > code .
+        Configurar Idioma/Timezone
+                link
+                        https://github.com/lucascudo/laravel-pt-BR-localization
+                > php artisan lang:publish
+                        > git add .
+                        > git commit -m "php artisan lang:publish" 
+                > composer require lucascudo/laravel-pt-br-localization --dev
+                        > git add .
+                        > git commit -m "composer require lucascudo/laravel-pt-br-localization --dev" 
+                > php artisan vendor:publish --tag=laravel-pt-br-localization
+                        > git add .
+                        > git commit -m "php artisan vendor:publish --tag=laravel-pt-br-localization" 
+                Alterar \config\app.php para: (Linha 86 do arquivo )
+                        De > 'locale' => 'en',
+                        P/ > 'locale' => 'pt_BR'
+                Alterar \config\app.php para: (Linha 73 do arquivo )
+                        De 'timezone' => 'UTC',
+                        P\ 'timezone' => 'America/Sao_Paulo',
+                                > git add .
+                                > git commit -m "Configurar Idioma/Timezone" 
+
+        Apontar banco de dados no arquivo .env ( De laravel P/ db_name )
+                .env
+                        DB_CONNECTION=mysql
+                        DB_HOST=127.0.0.1
+                        DB_PORT=3306
+                        DB_DATABASE=db_name
+                        DB_USERNAME=root
+                        DB_PASSWORD=
+
+        Criar do banco de dados padrão ( users, ...)
+                > php artisan migrate:fresh
+        Descomentar database\seeders\DatabaseSeeder.php
+                \App\Models\User::factory(10)->create();
+        Popular tabela users
+                > php artisan db:seed
+
+##  Publicar GitHub
+        git remote add origin https://github.com/robertomrr/02_CLGVT_API.git
+        git branch -M main
+        git push -u origin main
+
+##  Ativação a aplicação Laravel
+        > CMD 
+            > npm run dev
+            > php artisan serve
+        > Browser
+            > localhost:8000        
+## _____________________________________________________________________________
+
 ##  Criação do Controller
         > php artisan make:controller Api/v1/UserController --resource
         use App\Models\User;
         public function index()
             return User::all();
+
 ##  Criação de Rotas
         routes/api.php
         Route::get(uri:'/users',action:[UserController::class,'index']);
+
 ##  Retornar conteúdo padronizado utilizando Resources
         > php artisan make:resource v1/UserResource
         > git add .
         > git commit -m "php artisan make:resource v1/UserResource"
-##  GITHUB
-        git remote add origin https://github.com/robertomrr/02_CLGVT_API.git
-        git branch -M main
-        git push -u origin main
-    _____________________________________________________________________________
-    _____________________________________________________________________________
 
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## _____________________________________________________________________________
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## The Original README content
+        <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+
+        <p align="center">
+        <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+        <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+        <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+        <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+        </p>
 
 ## About Laravel
 
