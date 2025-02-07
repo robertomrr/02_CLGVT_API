@@ -14,7 +14,7 @@
     > git add .
     > git commit -m "npm install" 
 
-## Instalar do Breeze (blade)
+## Instalar do Breeze (api)
         Laravel Breeze é uma implementação mínima e simples de todos os recursos de autenticação do Laravel , incluindo login, registro, redefinição de senha, verificação de e-mail e confirmação de senha.
         Além disso, o Breeze inclui uma página simples de “perfil” onde o usuário pode atualizar seu nome, endereço de e-mail e senha.
         > composer require laravel/breeze --dev
